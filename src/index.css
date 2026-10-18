@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Karantina:wght@400;700&family=Heebo:wght@400;500;700;900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 40 22% 91%;
+    --foreground: 219 55% 23%;
+    --card: 0 0% 100%;
+    --card-foreground: 219 55% 23%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 219 55% 23%;
+    --primary: 25 100% 50%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 47 24% 93%;
+    --secondary-foreground: 219 55% 23%;
+    --muted: 47 24% 93%;
+    --muted-foreground: 219 20% 45%;
+    --accent: 73 86% 64%;
+    --accent-foreground: 219 55% 23%;
+    --destructive: 25 100% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 40 12% 80%;
+    --input: 40 12% 80%;
+    --ring: 219 55% 23%;
+    --radius: 0.75rem;
+    --font-heading: 'Heebo', ui-sans-serif, system-ui, sans-serif;
+    --font-body: 'Heebo', ui-sans-serif, system-ui, sans-serif;
+    --font-display: 'Heebo', ui-sans-serif, system-ui, sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    --title-size: clamp(36px, 6vw, 120px);
+    --container-min-h: clamp(360px, 68vh, 860px);
+    --circle-size: clamp(50px, 6vw, 95px);
+    --arrow-size: clamp(24px, 3vw, 40px);
+    --item-label-size: clamp(8px, 1vw, 13px);
+    --selected-icon-size: clamp(38px, 4vw, 56px);
+    --counter-size: clamp(18px, 2.4vw, 36px);
+    --soldier-max-w: 1300px;
+  }
+}
+
+/* מסך TOTEM גדול (אנכי) - הגדלה פי 2 */
+@media (min-height: 1400px) and (orientation: portrait) {
+  :root {
+    --title-size: clamp(64px, 9vw, 180px);
+    --container-min-h: 66vh;
+    --circle-size: clamp(100px, 12vw, 190px);
+    --arrow-size: clamp(48px, 6vw, 80px);
+    --item-label-size: clamp(16px, 1.8vw, 26px);
+    --selected-icon-size: clamp(76px, 7vw, 112px);
+    --counter-size: clamp(28px, 3vw, 48px);
+    --soldier-max-w: 2000px;
+  }
+  /* הרחקת הכותרת מהלוגו בפינה */
+  .totem-header { padding-top: clamp(60px, 8vh, 140px); }
+  /* מניעת גלילה בקונטיינר הלבן - הגבלת גובה המגש להתאים ל-66vh */
+  .tray-scroll { max-height: calc(66vh - 300px) !important; }
+  .soldier-area { padding: 0 !important; }
+  /* הגדלת הדמות במסך TOTEM */
+  .soldier-scale { transform: scale(1.35); transform-origin: center center; }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+    direction: rtl;
+    unicode-bidi: embed;
+  }
+  body {
+    @apply bg-background text-foreground font-body;
+    font-family: 'Heebo', ui-sans-serif, system-ui, sans-serif;
+    direction: rtl;
+    text-align: right;
+  }
+  .popup {
+    direction: rtl;
+    text-align: right;
+  }
+}
+
+.font-karantina { font-family: 'Karantina', cursive; }
+
+.soldier-area { padding: clamp(8px, 1.5vw, 24px) clamp(8px, 1vw, 20px) clamp(8px, 1.5vw, 24px) clamp(24px, 5vw, 120px); }
+
+/* אנימציות משחק */
+@keyframes shake {
+  0%, 100% { transform: translateX(0) rotate(0); }
+  20% { transform: translateX(-8px) rotate(-8deg); }
+  40% { transform: translateX(8px) rotate(8deg); }
+  60% { transform: translateX(-6px) rotate(-6deg); }
+  80% { transform: translateX(6px) rotate(6deg); }
+}
+.animate-shake { animation: shake 0.5s ease-in-out; }
+.animate-shake-loop { animation: shake 0.5s ease-in-out infinite; }
+
+@keyframes collapseShake {
+  0%, 100% { transform: translateX(0) rotate(0); }
+  10% { transform: translateX(-4px) rotate(-1deg); }
+  20% { transform: translateX(5px) rotate(1deg); }
+  30% { transform: translateX(-6px) rotate(-1deg); }
+  40% { transform: translateX(6px) rotate(1deg); }
+  50% { transform: translateX(-5px); }
+  60% { transform: translateX(5px) rotate(-1deg); }
+  70% { transform: translateX(-3px); }
+  80% { transform: translateX(3px) rotate(1deg); }
+  90% { transform: translateX(-2px); }
+}
+.animate-collapse { animation: collapseShake 1.6s ease-in-out infinite; }
+
+@keyframes dust {
+  0% { transform: translateY(0) scale(1); opacity: 0.8; }
+  100% { transform: translateY(-70px) scale(1.8); opacity: 0; }
+}
+.animate-dust { animation: dust 1.6s ease-out infinite; }
+
+@keyframes slideIn {
+  from { transform: translateY(24px) scale(0.96); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+.animate-slidein { animation: slideIn 0.3s ease-out; }
+
+@keyframes popIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+.animate-popin { animation: popIn 0.35s ease-out; }
+
+@keyframes packJump {
+  0%   { transform: translate(-50%, -50%) translate(var(--start-x, 0), var(--start-y, 0)) scale(2); opacity: 1; }
+  50%  { transform: translate(-50%, -50%) translate(calc(var(--start-x, 0) * 0.5), calc(var(--start-y, 0) * 0.5 - 6vh)) scale(1); opacity: 1; }
+  100% { transform: translate(-50%, -50%) translate(0, 0) scale(0); opacity: 0; }
+}
+
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(204, 242, 85, 0.7); }
+  50% { box-shadow: 0 0 0 10px rgba(204, 242, 85, 0); }
+}
+.animate-glow { animation: glowPulse 1.4s ease-in-out infinite; }
+
+/* פס גלילה מותאם אישית למגש הציוד */
+.tray-scroll::-webkit-scrollbar { display: none; }
+.tray-scroll { scrollbar-width: none; -ms-overflow-style: none; }
