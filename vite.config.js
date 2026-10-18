@@ -4,7 +4,7 @@ import path from 'path';
 
 // בפיתוח (npm start) הבסיס הוא "/", ובבנייה לגיטהאב הוא שם הריפו
 export default defineConfig(({ command }) => ({
-  base: command === 'build' ? '/equipment-game/' : '/',
+  base: command === 'build' ? '/Equipment-Game-/' : '/',
   plugins: [react()],
   resolve: {
     alias: { '@': path.resolve(__dirname, './src') },
