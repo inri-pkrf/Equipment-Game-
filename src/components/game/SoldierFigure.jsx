@@ -24,11 +24,15 @@ export default function SoldierFigure({ wornItems, leavingItems, shakingItems, p
       <div
         className="absolute transition-all duration-500 ease-in-out"
         style={{
-          width: isActive ? '70%' : 'auto',
-          height: isActive ? '100%' : '50%',
-          left: isActive ? '50%' : '-10%',
-          top: '50%',
-          transform: isActive ? 'translate(-50%, -50%)' : 'translateY(-50%)',
+          // הדמות הפעילה: ממלאת את כל הגובה, והרוחב נגזר מהיחס של התמונה (כמו קודם: 70% מהמיכל)
+          // הדמות הלא פעילה: קטנה, צמודה לשמאל וכולה בתוך המסך
+          width: 'auto',
+          aspectRatio: isActive ? `${aspect * 0.7}` : 'auto',
+          height: isActive ? '100%' : '36%',
+          left: isActive ? '50%' : '0%',
+          top: isActive ? '50%' : '98%',
+          transform: isActive ? 'translate(-50%, -50%)' : 'translate(0, -100%)',
+          pointerEvents: isActive ? 'none' : 'auto',
           zIndex: isActive ? 3 : 2,
           opacity: isActive ? 1 : 0.5,
           filter: 'none',
@@ -72,7 +76,7 @@ export default function SoldierFigure({ wornItems, leavingItems, shakingItems, p
   };
 
   return (
-    <div className="relative w-full mx-auto select-none h-full" style={{ aspectRatio: `${aspect}`, maxWidth: 'var(--soldier-max-w)' }}>
+    <div className="relative w-full mx-auto select-none h-full" style={{ aspectRatio: `${aspect}`, height: 'var(--soldier-h)', maxWidth: 'var(--soldier-max-w)' }}>
       {renderFigure('male', maleActive)}
       {renderFigure('female', !maleActive)}
     </div>

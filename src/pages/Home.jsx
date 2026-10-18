@@ -156,13 +156,13 @@ export default function Home() {
       style={{ fontFamily: "'Heebo', sans-serif", background: 'linear-gradient(135deg, #d0f0ffff 0%, #7ab8ffff 100%)', padding: 'clamp(8px, 2vw, 24px)' }}>
 
       {/* Header */}
-      <header className="totem-header relative w-full flex items-center justify-center mb-[2vh]"
-        style={{ minHeight: 'clamp(70px, 12vh, 140px)' }}>
+      <header className="totem-header relative w-full flex items-center justify-center mb-[0.5vh]"
+        style={{ minHeight: 'clamp(40px, 5vh, 80px)' }}>
         <img src={LOGO} alt="המכללה הלאומית לאיתנות ישראלית"
           className="absolute object-contain"
-          style={{ top: 0, right: 0, height: 'clamp(55px, 10vh, 110px)' }} />
+          style={{ top: 0, right: 0, height: 'clamp(34px, 5vh, 64px)' }} />
         <h1 className="font-karantina text-[#1A2F5A] text-center leading-none"
-          style={{ fontSize: 'var(--title-size)', padding: '0 clamp(110px, 12vw, 200px)' }}>
+          style={{ fontSize: 'var(--title-size)', padding: '0 clamp(70px, 8vw, 150px)' }}>
           איזה ציוד לוקחים לאתר הרס?
         </h1>
       </header>
@@ -173,8 +173,8 @@ export default function Home() {
 
         {/* Soldier area */}
         <div className="soldier-area flex-1 flex flex-col items-center justify-center min-h-0 gap-2">
-          <div ref={figureAreaRef} className="flex-1 flex items-center justify-center min-h-0 w-full">
-            <div className="soldier-scale w-full flex items-center justify-center">
+          <div ref={figureAreaRef} className="figure-area flex-1 flex items-center justify-center min-h-0 w-full">
+            <div className="w-full flex items-center justify-center">
               <SoldierFigure
                 wornItems={wearingItems}
                 leavingItems={leavingItems}
