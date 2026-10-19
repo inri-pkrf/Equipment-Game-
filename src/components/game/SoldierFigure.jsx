@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useLayoutEffect } from 'react';
 import ItemIcon from './ItemIcon';
 import { ANCHORS } from '@/lib/gameData';
 
@@ -8,6 +8,23 @@ const FEMALE_IMG = `${import.meta.env.BASE_URL}images/7a3d56495_.png`;
 export default function SoldierFigure({ wornItems, leavingItems, shakingItems, phase, activeGender, onSwitchGender }) {
   const maleActive = activeGender === 'male';
   const [aspects, setAspects] = useState({ male: 1.1, female: 1.1 });
+  const rootRef = useRef(null);
+  // המרחק (בפיקסלים) בין הקצה השמאלי של אזור הדמות לבין הקצה השמאלי של המסך
+  const [leftEdge, setLeftEdge] = useState(0);
+
+  useLayoutEffect(() => {
+    const measure = () => {
+      const el = rootRef.current;
+      if (el) setLeftEdge(el.getBoundingClientRect().left);
+    };
+    measure();
+    window.addEventListener('resize', measure);
+    document.addEventListener('fullscreenchange', measure);
+    return () => {
+      window.removeEventListener('resize', measure);
+      document.removeEventListener('fullscreenchange', measure);
+    };
+  }, []);
 
   const onImgLoad = (gender) => (e) => {
     const w = e.target.naturalWidth;
@@ -24,19 +41,19 @@ export default function SoldierFigure({ wornItems, leavingItems, shakingItems, p
       <div
         className="absolute transition-all duration-500 ease-in-out"
         style={{
-          // הדמות הפעילה: ממלאת את כל הגובה, והרוחב נגזר מהיחס של התמונה (כמו קודם: 70% מהמיכל)
-          // הדמות הלא פעילה: קטנה, צמודה לשמאל וכולה בתוך המסך
+          // שתי הדמויות באותו גודל.
+          // הפעילה במרכז האזור; הלא פעילה במחצית שקיפות, כשמרכזה בדיוק על הקצה השמאלי של המסך
+          // (חצי ממנה בתוך המסך וחצי בחוץ).
           width: 'auto',
-          aspectRatio: isActive ? `${aspect * 0.7}` : 'auto',
-          height: isActive ? '100%' : '36%',
-          left: isActive ? '50%' : '0%',
-          top: isActive ? '50%' : '98%',
-          transform: isActive ? 'translate(-50%, -50%)' : 'translate(0, -100%)',
-          pointerEvents: isActive ? 'none' : 'auto',
+          aspectRatio: `${(aspects[gender] || 1.1) * 0.7}`,
+          height: '100%',
+          left: isActive ? '50%' : `${-leftEdge}px`,
+          top: '50%',
+          transform: 'translate(-50%, -50%)',
+          pointerEvents: 'none',
           zIndex: isActive ? 3 : 2,
           opacity: isActive ? 1 : 0.5,
           filter: 'none',
-          cursor: !isActive && phase === 'playing' ? 'pointer' : 'default',
         }}
         onClick={() => { if (!isActive && phase === 'playing') onSwitchGender(); }}
       >
@@ -51,6 +68,7 @@ export default function SoldierFigure({ wornItems, leavingItems, shakingItems, p
           >
             <img src={img} alt={gender === 'male' ? 'חייל' : 'חיילת'}
               className="h-full w-auto block select-none" draggable={false}
+              style={{ pointerEvents: 'none' }}
               onLoad={onImgLoad(gender)} />
 
             {wornItems.map(w => {
@@ -67,16 +85,19 @@ export default function SoldierFigure({ wornItems, leavingItems, shakingItems, p
             })}
           </div>
         ) : (
-          <img src={img} alt="חיילת"
-            className="h-full w-auto block select-none" draggable={false}
-            onLoad={onImgLoad(gender)} />
+          <div className="relative h-full flex items-center justify-center">
+            <img src={img} alt={gender === 'male' ? 'חייל' : 'חיילת'}
+              className="h-full w-auto block select-none" draggable={false}
+              style={{ pointerEvents: 'auto', cursor: phase === 'playing' ? 'pointer' : 'default' }}
+              onLoad={onImgLoad(gender)} />
+          </div>
         )}
       </div>
     );
   };
 
   return (
-    <div className="relative w-full min-w-0 mx-auto select-none h-full" style={{ aspectRatio: `${aspect}`, height: 'var(--soldier-h)', maxWidth: 'var(--soldier-max-w)' }}>
+    <div ref={rootRef} className="relative w-full min-w-0 mx-auto select-none h-full" style={{ aspectRatio: `${aspect}`, height: 'var(--soldier-h)', maxWidth: 'var(--soldier-max-w)' }}>
       {renderFigure('male', maleActive)}
       {renderFigure('female', !maleActive)}
     </div>
