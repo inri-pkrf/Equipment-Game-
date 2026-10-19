@@ -55,7 +55,8 @@ export default function SummaryScreen({ score, mistakes, selectedIds, onReplay }
           <p className="text-[11px] text-[#1A2F5A]/50">{message}</p>
         </div>
 
-        {/* פריטים שחייבים לקחת ולא נבחרו */}
+        {/* פריטים שחייבים לקחת ולא נבחרו – מוצג רק אם חסר משהו */}
+        {missedItems.length > 0 && (
         <div className="rounded-2xl p-3 mb-3" style={{ background: '#FFF5E6' }}>
           <h3 className="font-black text-[#F97316] mb-2 text-sm md:text-base flex items-center gap-1">
             <AlertTriangle className="w-4 h-4" /> פריטים שחייבים לקחת לאתר הרס ולא נבחרו
@@ -72,6 +73,7 @@ export default function SummaryScreen({ score, mistakes, selectedIds, onReplay }
             ))}
           </div>
         </div>
+        )}
 
         {/* פריטים שחייבים לקחת ונבחרו */}
         {selectedCorrectItems.length > 0 && (

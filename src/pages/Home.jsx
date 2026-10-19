@@ -5,7 +5,6 @@ import OpeningPopup from '@/components/game/OpeningPopup';
 import SummaryScreen from '@/components/game/SummaryScreen';
 import PackingAnimation from '@/components/game/PackingAnimation';
 import ItemIcon from '@/components/game/ItemIcon';
-import SelectedItemsList from '@/components/game/SelectedItemsList';
 import { Maximize, Minimize, ChevronUp, ChevronDown } from 'lucide-react';
 
 const INNER_SHADOW = 'inset 10px 10px 20px 0px rgba(0,0,0,0.25)';
@@ -184,10 +183,6 @@ export default function Home() {
                 onSwitchGender={() => setActiveGender(g => g === 'male' ? 'female' : 'male')}
               />
             </div>
-          </div>
-          {/* הריבועים צפים בתחתית האזור ולא תופסים מקום – אין גלילה */}
-          <div className="absolute left-0 right-0 bottom-1 flex justify-center pointer-events-none">
-            <SelectedItemsList items={selectedItems} />
           </div>
         </div>
 
