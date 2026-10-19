@@ -11,11 +11,16 @@ export default function SoldierFigure({ wornItems, leavingItems, shakingItems, p
   const rootRef = useRef(null);
   // המרחק (בפיקסלים) בין הקצה השמאלי של אזור הדמות לבין הקצה השמאלי של המסך
   const [leftEdge, setLeftEdge] = useState(0);
+  // רוחב המסך – כדי למרכז את הדמות הפעילה במרכז המסך כולו
+  const [viewportW, setViewportW] = useState(
+    typeof window !== 'undefined' ? document.documentElement.clientWidth : 0
+  );
 
   useLayoutEffect(() => {
     const measure = () => {
       const el = rootRef.current;
       if (el) setLeftEdge(el.getBoundingClientRect().left);
+      setViewportW(document.documentElement.clientWidth);
     };
     measure();
     window.addEventListener('resize', measure);
@@ -47,7 +52,7 @@ export default function SoldierFigure({ wornItems, leavingItems, shakingItems, p
           width: 'auto',
           aspectRatio: `${(aspects[gender] || 1.1) * 0.7}`,
           height: '100%',
-          left: isActive ? '50%' : `${-leftEdge}px`,
+          left: isActive ? `${viewportW / 2 - leftEdge}px` : `${-leftEdge}px`,
           top: '50%',
           transform: 'translate(-50%, -50%)',
           pointerEvents: 'none',

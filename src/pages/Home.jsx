@@ -172,7 +172,7 @@ export default function Home() {
         style={{ width: '100%', maxWidth: '1600px', minHeight: 'var(--container-min-h)', background: 'transparent', padding: 'clamp(12px, 2vw, 32px)' }}>
 
         {/* Soldier area */}
-        <div className="soldier-area flex-1 flex flex-col items-center justify-center min-h-0 min-w-0 gap-2">
+        <div className="soldier-area relative flex-1 flex flex-col items-center justify-center min-h-0 min-w-0 gap-2">
           <div ref={figureAreaRef} className="figure-area flex-1 flex items-center justify-center min-h-0 min-w-0 w-full">
             <div className="w-full min-w-0 flex items-center justify-center">
               <SoldierFigure
@@ -185,7 +185,10 @@ export default function Home() {
               />
             </div>
           </div>
-          <SelectedItemsList items={selectedItems} />
+          {/* הריבועים צפים בתחתית האזור ולא תופסים מקום – אין גלילה */}
+          <div className="absolute left-0 right-0 bottom-1 flex justify-center pointer-events-none">
+            <SelectedItemsList items={selectedItems} />
+          </div>
         </div>
 
         {/* Equipment menu */}
