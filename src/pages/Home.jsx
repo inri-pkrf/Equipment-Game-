@@ -153,7 +153,7 @@ export default function Home() {
 
   return (
     <div dir="rtl" className="min-h-screen flex flex-col items-center overflow-x-hidden"
-      style={{ fontFamily: "'Heebo', sans-serif", background: 'linear-gradient(135deg, #d0f0ffff 0%, #7ab8ffff 100%)', padding: 'clamp(8px, 2vw, 24px)' }}>
+      style={{ fontFamily: "'Heebo', sans-serif", background: 'linear-gradient(135deg, rgb(255, 255, 255) 0%, rgb(255, 255, 255) 100%)', padding: 'clamp(8px, 2vw, 24px)' }}>
 
       {/* Header */}
       <header className="totem-header relative w-full flex items-center justify-center mb-[0.5vh]"
