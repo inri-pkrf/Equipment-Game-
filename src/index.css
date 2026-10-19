@@ -58,7 +58,7 @@
     --soldier-min-h: 74vh;
   }
   /* הרחקת הכותרת מהלוגו בפינה */
-  .totem-header { padding-top: 0; }
+  .totem-header { padding-top: 4vh; }
   /* מניעת גלילה בקונטיינר הלבן - הגבלת גובה המגש להתאים ל-66vh */
   .tray-scroll { max-height: calc(70vh - 300px) !important; }
   .soldier-area { padding: 0 !important; }
