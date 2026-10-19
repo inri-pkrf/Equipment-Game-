@@ -172,9 +172,9 @@ export default function Home() {
         style={{ width: '100%', maxWidth: '1600px', minHeight: 'var(--container-min-h)', background: 'transparent', padding: 'clamp(12px, 2vw, 32px)' }}>
 
         {/* Soldier area */}
-        <div className="soldier-area flex-1 flex flex-col items-center justify-center min-h-0 gap-2">
-          <div ref={figureAreaRef} className="figure-area flex-1 flex items-center justify-center min-h-0 w-full">
-            <div className="w-full flex items-center justify-center">
+        <div className="soldier-area flex-1 flex flex-col items-center justify-center min-h-0 min-w-0 gap-2">
+          <div ref={figureAreaRef} className="figure-area flex-1 flex items-center justify-center min-h-0 min-w-0 w-full">
+            <div className="w-full min-w-0 flex items-center justify-center">
               <SoldierFigure
                 wornItems={wearingItems}
                 leavingItems={leavingItems}

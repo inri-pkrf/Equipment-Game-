@@ -76,7 +76,7 @@ export default function SoldierFigure({ wornItems, leavingItems, shakingItems, p
   };
 
   return (
-    <div className="relative w-full mx-auto select-none h-full" style={{ aspectRatio: `${aspect}`, height: 'var(--soldier-h)', maxWidth: 'var(--soldier-max-w)' }}>
+    <div className="relative w-full min-w-0 mx-auto select-none h-full" style={{ aspectRatio: `${aspect}`, height: 'var(--soldier-h)', maxWidth: 'var(--soldier-max-w)' }}>
       {renderFigure('male', maleActive)}
       {renderFigure('female', !maleActive)}
     </div>
