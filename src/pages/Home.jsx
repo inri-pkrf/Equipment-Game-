@@ -148,7 +148,7 @@ export default function Home() {
     return () => document.removeEventListener('fullscreenchange', onChange);
   }, []);
 
-  const onNavigateHome = () => { window.location.href = 'https://totem-smart-flow.base44.app/'; };
+  const onNavigateHome = () => { window.location.href = 'https://inri-pkrf.github.io/Totem-Pro-Final/'; };
 
   return (
     <div dir="rtl" className="min-h-screen flex flex-col items-center overflow-x-hidden"
