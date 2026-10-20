@@ -7,7 +7,7 @@ import PackingAnimation from '@/components/game/PackingAnimation';
 import ItemIcon from '@/components/game/ItemIcon';
 import { Maximize, Minimize, ChevronUp, ChevronDown } from 'lucide-react';
 
-const INNER_SHADOW = 'inset 10px 10px 20px 0px rgba(0,0,0,0.25)';
+const INNER_SHADOW = 'inset 10px 10px 20px 0px rgba(0,0,0,0.26)';
 const LOGO = `${import.meta.env.BASE_URL}images/83ea21c33_INRI-LOGO.svg`;
 const HOME_BTN = `${import.meta.env.BASE_URL}images/5d2d4d14b_home-btn.png`;
 
@@ -138,6 +138,7 @@ export default function Home() {
     setPhase('playing');
   };
 
+
   const toggleFullscreen = () => {
     if (!document.fullscreenElement) document.documentElement.requestFullscreen?.();
     else document.exitFullscreen?.();
@@ -149,6 +150,7 @@ export default function Home() {
   }, []);
 
   const onNavigateHome = () => { window.location.href = 'https://inri-pkrf.github.io/Totem-Pro-Final/'; };
+
 
   return (
     <div dir="rtl" className="min-h-screen flex flex-col items-center overflow-x-hidden"
